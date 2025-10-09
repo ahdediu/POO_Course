@@ -1,4 +1,4 @@
-# 🚦 Smart Traffic Flow Simulation 
+# 🚦Smart Traffic Flow Simulation 
 
 ## Objective
 Design and implement a **traffic-flow simulator** where autonomous vehicles move through intersections under the control of traffic lights.  
