@@ -1,10 +1,10 @@
 package course01;
 
-public class Lowyer extends Employee{
+public class Lawyer extends Employee{
     private int workedHours;
     private double hourlyRate;
 
-    public Lowyer(String name, double salary, int workedHours, double hourlyRate) {
+    public Lawyer(String name, double salary, int workedHours, double hourlyRate) {
         super(name, salary);
         this.workedHours = workedHours;
         this.hourlyRate = hourlyRate;
@@ -19,7 +19,7 @@ public class Lowyer extends Employee{
         return super.getSalary() + workedHours*hourlyRate;
     }
 
-    @Override
+    //@Override
     public String toString() {
         return "Lowyer{" +
                 "workedHours=" + workedHours +
@@ -28,7 +28,7 @@ public class Lowyer extends Employee{
     }
 
     public static void main(String[] args) {
-        Lowyer l =new Lowyer("Pedro",1500,30,60);
+        Lawyer l =new Lawyer("Pedro",1500,30,60);
 
         System.out.println(l);
         System.out.println(l.getSalary());
