@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0"
+      xmlns="http://javafx.com/javafx/21.0.8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="lab03.TimerController">
+
+    <MenuBar>
+        <Menu text="File">
+            <MenuItem text="New"/>
+            <MenuItem text="Open…"/>
+            <Menu text="Open Recent"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Close"/>
+            <MenuItem text="Save"/>
+            <MenuItem text="Save As…"/>
+            <MenuItem text="Revert"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Preferences…"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Quit"/>
+        </Menu>
+        <Menu text="Edit">
+            <MenuItem text="Undo"/>
+            <MenuItem text="Redo"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Cut"/>
+            <MenuItem text="Copy"/>
+            <MenuItem text="Paste"/>
+            <MenuItem text="Delete"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Select All"/>
+            <MenuItem text="Unselect All"/>
+        </Menu>
+        <Menu text="Help">
+            <MenuItem text="About MyHelloApp"/>
+        </Menu>
+    </MenuBar>
+
+    <AnchorPane VBox.vgrow="ALWAYS">
+        <Label fx:id="timeLabel"
+               layoutX="104.0" layoutY="39.0"
+               prefWidth="408.0" prefHeight="113.0"
+               alignment="CENTER" text="00:00:00" textAlignment="CENTER" textFill="#97fc23"
+               style="-fx-background-color: black;">
+            <font><Font size="92.0"/></font>
+        </Label>
+
+        <Button fx:id="startBtn" layoutX="57.0"  layoutY="294.0" text="Start" onAction="#handleStart"/>
+        <Button fx:id="stopBtn"  layoutX="196.0" layoutY="294.0" text="Stop"  onAction="#handleStop"/>
+        <Button fx:id="resetBtn" layoutX="361.0" layoutY="294.0" text="Reset" onAction="#handleReset"/>
+    </AnchorPane>
+</VBox>
