@@ -195,4 +195,9 @@ src/
 
 ---
 
+## Java FX settings in IntelliJ
+- Edit Configurations
+- Add Java VM Options
+- --module-path "C:\Users\adediu\javafx-sdk-21.0.7\lib" --add-modules javafx.controls,javafx.fxml
+
 **End of Specification**

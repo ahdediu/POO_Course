@@ -9,5 +9,8 @@ public class testStrings {
         System.out.println(b);
         float f = 2.3f;
         //System.out.println(s.substring(7));
+        while (b){
+            System.out.println("never reached");
+        }
     }
 }
