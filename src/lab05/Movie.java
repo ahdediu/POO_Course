@@ -1,7 +1,6 @@
 package lab05;
 
-import lab04.Actor;
-import lab04.Director;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +11,12 @@ abstract class ArtWork {
     protected String title;
 }
 public class Movie extends ArtWork implements Playable{
-    private Director director;
+    private Lab04.Director director;
     @Override
-    public void play() {
+    final public void play() {
         System.out.println("Playing movie " + title);
     }
-    private List<Actor> scenes = new ArrayList<>();
+    private List<Lab04.Actor> actors = new ArrayList<>();
 }
 
 class Studio {

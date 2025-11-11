@@ -1,5 +1,8 @@
-package lab04;
+package Lab04;
 
 public class Director {
-    private String name;
+
+
+
+
 }

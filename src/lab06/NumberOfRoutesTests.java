@@ -4,7 +4,9 @@ import java.math.BigInteger;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-
+//Search for "junit" --
+// you're looking for something like
+// "junit:junit:4.11".
 class GridPath {
 
     /** Classical factorial: n! */
