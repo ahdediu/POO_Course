@@ -1,4 +1,4 @@
-# Lab 02 — Projeto Movie Manager
+# Lab 07 — Projeto Movie Manager
 **Objetivo:**  
 Implementar uma versão funcional do sistema *Movie Manager*, aplicando **Programação Orientada a Objetos (POO)**, 
 **encapsulamento**, e **coleções** (`ArrayList`).
@@ -35,14 +35,15 @@ private String title;
 private int year;
 private String genre;
 private int rating; // 1–10
+```
 
 Tarefas:
-	1.	Criar construtor completo.
-	2.	Gerar getters e setters automaticamente (IntelliJ → Code → Generate).
-	3.	Adicionar método toString() com o formato:  Título (Ano) - Género - Rating
-	4.	(Opcional) Validar rating no setRating() (1–10).
+1.	Criar construtor completo.
+2.	Gerar getters e setters automaticamente (IntelliJ → Code → Generate).
+3.	Adicionar método toString() com o formato:  Título (Ano) - Género - Rating
+4.	(Opcional) Validar rating no setRating() (1–10).
         
-## 🗂️ 2. Classe `MovieManager`
+##  2. Classe `MovieManager`
 
 **Atributo sugerido:**
 ```java
@@ -177,6 +178,7 @@ public class MovieManagerTest {
 ## 5. Dados de Teste
 
 Sugestão para os primeiros filmes a inserir:
+
 | Título | Ano | Género | Rating |
 |--------|------|--------|--------|
 | Inception | 2010 | Sci-Fi | 9 |
@@ -184,3 +186,129 @@ Sugestão para os primeiros filmes a inserir:
 | Oppenheimer | 2023 | Drama | 8 |
 | The Matrix | 1999 | Action | 9 |
 | Arrival | 2016 | Sci-Fi | 8 |
+
+## 🧪 6. Testes (JUnit) — Garantir que o nosso código funciona
+
+Nesta fase não queremos “adivinhar” se o código funciona.  
+Vamos escrever **testes automáticos** para verificar o comportamento das classes.
+
+A ideia é simples:
+- Cada teste verifica **um cenário concreto**.
+- Se algo estiver errado, o teste falha e sabemos onde olhar.
+
+Vamos criar duas classes de teste:
+
+- `MovieTest`
+- `MovieManagerTest`
+
+### 6.1 Testes para `Movie`
+
+O que faz sentido testar?
+
+- Se o construtor guarda corretamente os valores.
+- Se `setRating` atualiza o rating.
+- Se `toString()` devolve algo no formato esperado.
+
+Exemplo:
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MovieTest {
+
+    @Test
+    public void testConstructorAndGetters() {
+        Movie m = new Movie("Inception", 2010, "Sci-Fi", 9);
+        assertEquals("Inception", m.getTitle());
+        assertEquals(2010, m.getYear());
+        assertEquals("Sci-Fi", m.getGenre());
+        assertEquals(9, m.getRating());
+    }
+
+    @Test
+    public void testSetRating() {
+        Movie m = new Movie("Arrival", 2016, "Sci-Fi", 8);
+        m.setRating(10);
+        assertEquals(10, m.getRating());
+    }
+}
+```
+
+### 6.2 Testes para `MovieManager`
+
+Aqui testamos a **lógica de gestão**:
+
+- Adicionar filmes (sem duplicados).
+- Procurar por parte do título.
+- Atualizar rating.
+- Remover filmes.
+
+Exemplo:
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
+public class MovieManagerTest {
+
+    @Test
+    public void testAddMovieAndNoDuplicates() {
+        MovieManager mm = new MovieManager();
+        Movie m1 = new Movie("Inception", 2010, "Sci-Fi", 9);
+
+        assertTrue(mm.addMovie(m1));          // primeiro deve conseguir
+        assertFalse(mm.addMovie(m1));         // duplicado não deve entrar
+        assertEquals(1, mm.listAll().size()); // continua só 1
+    }
+
+    @Test
+    public void testSearchByTitle() {
+        MovieManager mm = new MovieManager();
+        mm.addMovie(new Movie("Inception", 2010, "Sci-Fi", 9));
+        mm.addMovie(new Movie("Interstellar", 2014, "Sci-Fi", 10));
+
+        List<Movie> result = mm.searchByTitle("in");
+        assertEquals(2, result.size());
+
+        result = mm.searchByTitle("stellar");
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    public void testUpdateRating() {
+        MovieManager mm = new MovieManager();
+        mm.addMovie(new Movie("Matrix", 1999, "Action", 9));
+
+        boolean ok = mm.updateRating("Matrix", 1999, 7);
+        assertTrue(ok);
+        assertEquals(7, mm.listAll().get(0).getRating());
+
+        // filme inexistente
+        assertFalse(mm.updateRating("Unknown", 2000, 5));
+    }
+
+    @Test
+    public void testRemove() {
+        MovieManager mm = new MovieManager();
+        mm.addMovie(new Movie("Arrival", 2016, "Sci-Fi", 8));
+        assertEquals(1, mm.listAll().size());
+
+        boolean removed = mm.remove("Arrival", 2016);
+        assertTrue(removed);
+        assertEquals(0, mm.listAll().size());
+    }
+}
+```
+
+### 6.3 O que pedimos aos estudantes
+
+- Criar e completar `MovieTest` e `MovieManagerTest`.
+- Cada método de teste deve:
+    - Preparar o cenário (criar objetos),
+    - Chamar o método a testar,
+    - Verificar o resultado com `assertEquals`, `assertTrue`, etc.
+- Não é preciso testar tudo — mas os casos principais **devem** ser cobertos.
+
+> Estes testes ajudam-nos a confiar no nosso código antes de avançar para versões mais complexas (ficheiros, GUI, etc.).
